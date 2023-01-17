@@ -1,5 +1,5 @@
 class HotelsController < ApplicationController
-  before_action :set_hotel, only: %i[ show update destroy ]
+  before_action :set_hotel, only: %i[show update destroy]
 
   # GET /hotels
   def index
@@ -39,13 +39,14 @@ class HotelsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_hotel
-      @hotel = Hotel.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def hotel_params
-      params.require(:hotel).permit(:name, :location, :email, :phone_number, :user_id, images: [])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_hotel
+    @hotel = Hotel.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def hotel_params
+    params.require(:hotel).permit(:name, :location, :email, :phone_number, :user_id, images: [])
+  end
 end
