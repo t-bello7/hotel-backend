@@ -2,21 +2,20 @@
 require 'swagger_helper'
 
 describe 'Bookings API' do
-
   path '/api/v3/bookings' do
-
     post 'Creates a room' do
       tags 'Bookings'
       consumes 'application/json'
       parameter name: :booking, in: :body, schema: {
-        type: :object,                
+        type: :object,
         properties: {
-          days: { type: :string },
+          days: { type: :integer },
           booking_date: { type: :datetime },
-          amount: { type: :float },        
-          room_id: { type: :bigint }                   
+          amount: { type: :float },
+          room_id: { type: :bigint },
+          user_id: { type: :bigint }
         },
-        required: [ 'days', 'booking_date', 'amount', 'user_id', 'room_id' ]
+        required: %w[days booking_date amount user_id room_id]
       }
 
       response '201', 'hotel created' do
@@ -32,7 +31,6 @@ describe 'Bookings API' do
   end
 
   path '/api/v3/bookings/{id}' do
-
     get 'Retrieves a booking' do
       tags 'Bookings', 'Another Tag'
       produces 'application/json', 'application/xml'
@@ -41,16 +39,16 @@ describe 'Bookings API' do
 
       response '200', 'booking found' do
         schema type: :object,
-          properties: {
-            id: { type: :integer },
-            days: { type: :string },
-            booking_date: { type: :datetime },
-            amount: { type: :float },        
-            room_id: { type: :bigint },
-            created_at: { type: :timestamps },
-            updated_at: {type: :timestamps }
-          },
-          required: [ 'id', 'name', 'location', 'email', 'phone_number', 'room_id' ]
+               properties: {
+                 id: { type: :integer },
+                 days: { type: :string },
+                 booking_date: { type: :datetime },
+                 amount: { type: :float },
+                 room_id: { type: :bigint },
+                 created_at: { type: :timestamps },
+                 updated_at: { type: :timestamps }
+               },
+               required: %w[id name location email phone_number room_id]
 
         let(:id) { Booking.create(name: 'foo', location: 'location address', email: 'example.com', phone_number: '23490567432').id }
         run_test!
@@ -62,7 +60,7 @@ describe 'Bookings API' do
       end
 
       response '406', 'unsupported accept header' do
-        let(:'Accept') { 'application/foo' }
+        let(:Accept) { 'application/foo' }
         run_test!
       end
     end

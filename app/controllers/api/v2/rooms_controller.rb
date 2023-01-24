@@ -1,5 +1,5 @@
 class Api::V2::RoomsController < ApplicationController
-  before_action :set_api_v2_room, only: %i[ show update destroy ]
+  before_action :set_api_v2_room, only: %i[show update destroy]
 
   # GET /api/v2/rooms
   def index
@@ -39,13 +39,14 @@ class Api::V2::RoomsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_api_v2_room
-      @api_v2_room = Room.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def api_v2_room_params
-      params.fetch(:api_v2_room, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_api_v2_room
+    @api_v2_room = Room.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def api_v2_room_params
+    params.fetch(:api_v2_room, {})
+  end
 end

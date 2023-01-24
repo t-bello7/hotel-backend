@@ -2,22 +2,20 @@
 require 'swagger_helper'
 
 describe 'Rooms API' do
-
   path '/api/v2/rooms' do
-
     post 'Creates a room' do
       tags 'Rooms'
       consumes 'application/json'
       parameter name: :room, in: :body, schema: {
-        type: :object,                
+        type: :object,
         properties: {
           name: { type: :string },
           type: { type: :string },
           bed_count: { type: :integer },
           price: { type: :float },
-          hotel_id: {type: :bigint}                   
+          hotel_id: { type: :bigint }
         },
-        required: [ 'name', 'type', 'bed_count', 'price', 'hotel_id' ]
+        required: %w[name type bed_count price hotel_id]
       }
 
       response '201', 'room created' do
@@ -33,7 +31,6 @@ describe 'Rooms API' do
   end
 
   path '/api/v1/rooms/{id}' do
-
     get 'Retrieves a room' do
       tags 'Rooms', 'Another Tag'
       produces 'application/json', 'application/xml'
@@ -42,17 +39,17 @@ describe 'Rooms API' do
 
       response '200', 'hotel found' do
         schema type: :object,
-          properties: {
-            id: { type: :integer },
-            name: { type: :string },
-            type: { type: :string },
-            bed_count: { type: :integer },
-            price: { type: :float },
-            hotel_id: {type: :bigint}, 
-            created_at: { type: :timestamps },
-            updated_at: {type: :timestamps }
-          },
-          required: [ 'id', 'name', 'location', 'email', 'phone_number', 'hotel_id' ]
+               properties: {
+                 id: { type: :integer },
+                 name: { type: :string },
+                 type: { type: :string },
+                 bed_count: { type: :integer },
+                 price: { type: :float },
+                 hotel_id: { type: :bigint },
+                 created_at: { type: :timestamps },
+                 updated_at: { type: :timestamps }
+               },
+               required: %w[id name location email phone_number hotel_id]
 
         let(:id) { Room.create(name: 'foo', type: 'VIP room', bed_count: 5, hotel_id: 1, price: 99).id }
         run_test!
@@ -64,7 +61,7 @@ describe 'Rooms API' do
       end
 
       response '406', 'unsupported accept header' do
-        let(:'Accept') { 'application/foo' }
+        let(:Accept) { 'application/foo' }
         run_test!
       end
     end

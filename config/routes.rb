@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/api-docs'
-  mount Rswag::Api::Engine => '/api-docs' 
+  mount Rswag::Api::Engine => '/api-docs'
 
   devise_for :users
 
@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     namespace :v0 do
       resources :users do
         resources :hotels
-        resources :bookings        
+        resources :bookings
       end
     end
     namespace :v3 do
@@ -19,10 +19,10 @@ Rails.application.routes.draw do
         resources :bookings
       end
     end
-    namespace :v1 do      
+    namespace :v1 do
       resources :hotels do
         resources :rooms
       end
     end
-  end  
-end  
+  end
+end

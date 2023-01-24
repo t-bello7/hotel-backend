@@ -1,8 +1,8 @@
 class Api::V1::HotelsController < ApplicationController
-  before_action :set_api_v1_hotel, only: %i[ show update destroy ]
+  before_action :set_api_v1_hotel, only: %i[show update destroy]
 
   # GET /api/v1/hotels
-  def index    
+  def index
     @api_v1_hotels = Hotel.all
 
     render json: @api_v1_hotels
@@ -39,13 +39,14 @@ class Api::V1::HotelsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_api_v1_hotel
-      @api_v1_hotel = Hotel.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def api_v1_hotel_params
-      params.fetch(:api_v1_hotel, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_api_v1_hotel
+    @api_v1_hotel = Hotel.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def api_v1_hotel_params
+    params.fetch(:api_v1_hotel, {})
+  end
 end

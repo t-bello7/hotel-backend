@@ -1,5 +1,5 @@
 class Api::V3::BookingsController < ApplicationController
-  before_action :set_api_v3_booking, only: %i[ show update destroy ]
+  before_action :set_api_v3_booking, only: %i[show update destroy]
 
   # GET /api/v3/bookings
   def index
@@ -39,13 +39,14 @@ class Api::V3::BookingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_api_v3_booking
-      @api_v3_booking = Api::V3::Booking.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def api_v3_booking_params
-      params.fetch(:api_v3_booking, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_api_v3_booking
+    @api_v3_booking = Api::V3::Booking.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def api_v3_booking_params
+    params.fetch(:api_v3_booking, {})
+  end
 end

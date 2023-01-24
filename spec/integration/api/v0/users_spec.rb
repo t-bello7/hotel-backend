@@ -2,21 +2,19 @@
 require 'swagger_helper'
 
 describe 'Users API' do
-
   path '/api/v0/users' do
-
     post 'Creates a user' do
       tags 'Users'
       consumes 'application/json'
       parameter name: :user, in: :body, schema: {
-        type: :object,        
+        type: :object,
         properties: {
           username: { type: :string },
           email: { type: :string },
           role: { type: :string },
-          password: {type: :string}                            
+          password: { type: :string }
         },
-        required: [ 'username', 'email', 'role', 'password' ]
+        required: %w[username email role password]
       }
 
       response '201', 'hotel created' do
@@ -32,7 +30,6 @@ describe 'Users API' do
   end
 
   path '/api/v0/users/{id}' do
-
     get 'Retrieves a user' do
       tags 'Users', 'Another Tag'
       produces 'application/json', 'application/xml'
@@ -41,16 +38,16 @@ describe 'Users API' do
 
       response '200', 'hotel found' do
         schema type: :object,
-          properties: {
-            id: { type: :integer },
-            username: { type: :string },
-            email: { type: :string },
-            role: { type: :string },
-            password: { type: :string}, 
-            created_at: { type: :timestamps },
-            updated_at: { type: :timestamps }
-          },
-          required: [ 'id', 'username', 'email', 'role', 'password' ]
+               properties: {
+                 id: { type: :integer },
+                 username: { type: :string },
+                 email: { type: :string },
+                 role: { type: :string },
+                 password: { type: :string },
+                 created_at: { type: :timestamps },
+                 updated_at: { type: :timestamps }
+               },
+               required: %w[id username email role password]
 
         let(:id) { User.create(username: 'foo', email: 'www.example.com', role: 'user', paaword: '1234').id }
         run_test!
@@ -62,7 +59,7 @@ describe 'Users API' do
       end
 
       response '406', 'unsupported accept header' do
-        let(:'Accept') { 'application/foo' }
+        let(:Accept) { 'application/foo' }
         run_test!
       end
     end

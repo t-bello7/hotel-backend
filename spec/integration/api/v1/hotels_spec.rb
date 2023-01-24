@@ -2,22 +2,20 @@
 require 'swagger_helper'
 
 describe 'Hotels API' do
-
   path '/api/v1/hotels' do
-
     post 'Creates a hotel' do
       tags 'Hotels'
       consumes 'application/json'
       parameter name: :hotel, in: :body, schema: {
-        type: :object,        
+        type: :object,
         properties: {
           name: { type: :string },
           location: { type: :string },
           email: { type: :string },
           phone_number: { type: :integer },
-          user_id: {type: :bigint}                   
+          user_id: { type: :bigint }
         },
-        required: [ 'name', 'location', 'email', 'phone_number', 'user_id' ]
+        required: %w[name location email phone_number user_id]
       }
 
       response '201', 'hotel created' do
@@ -33,7 +31,6 @@ describe 'Hotels API' do
   end
 
   path '/api/v1/hotels/{id}' do
-
     get 'Retrieves a hotel' do
       tags 'Hotels', 'Another Tag'
       produces 'application/json', 'application/xml'
@@ -42,17 +39,17 @@ describe 'Hotels API' do
 
       response '200', 'hotel found' do
         schema type: :object,
-          properties: {
-            id: { type: :integer },
-            name: { type: :string },
-            location: { type: :string },
-            email: { type: :string },
-            phone_number: { type: :integer },
-            user_id: { type: :integer },
-            created_at: { type: :timestamps },
-            updated_at: {type: :timestamps }
-          },
-          required: [ 'id', 'name', 'location', 'email', 'phone_number', user_id: 1 ]
+               properties: {
+                 id: { type: :integer },
+                 name: { type: :string },
+                 location: { type: :string },
+                 email: { type: :string },
+                 phone_number: { type: :integer },
+                 user_id: { type: :integer },
+                 created_at: { type: :timestamps },
+                 updated_at: { type: :timestamps }
+               },
+               required: ['id', 'name', 'location', 'email', 'phone_number', { user_id: 1 }]
 
         let(:id) { Hotel.create(name: 'foo', location: 'location address', email: 'example.com', phone_number: '23490567432', user_id: 1).id }
         run_test!
@@ -64,7 +61,7 @@ describe 'Hotels API' do
       end
 
       response '406', 'unsupported accept header' do
-        let(:'Accept') { 'application/foo' }
+        let(:Accept) { 'application/foo' }
         run_test!
       end
     end
