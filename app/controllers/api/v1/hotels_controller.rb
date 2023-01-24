@@ -2,7 +2,7 @@ class Api::V1::HotelsController < ApplicationController
   before_action :set_api_v1_hotel, only: %i[ show update destroy ]
 
   # GET /api/v1/hotels
-  def index
+  def index    
     @api_v1_hotels = Hotel.all
 
     render json: @api_v1_hotels

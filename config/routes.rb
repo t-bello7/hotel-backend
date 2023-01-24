@@ -5,6 +5,12 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :api do
+    namespace :v0 do
+      resources :users do
+        resources :hotels
+        resources :bookings        
+      end
+    end
     namespace :v3 do
       resources :bookings
     end
@@ -13,7 +19,7 @@ Rails.application.routes.draw do
         resources :bookings
       end
     end
-    namespace :v1 do
+    namespace :v1 do      
       resources :hotels do
         resources :rooms
       end

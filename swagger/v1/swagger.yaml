@@ -4,6 +4,104 @@ info:
   title: API V1
   version: v1
 paths:
+  "/api/v0/users":
+    post:
+      summary: Creates a user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '201':
+          description: hotel created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                role:
+                  type: string
+                password:
+                  type: string
+              required:
+              - username
+              - email
+              - role
+              - password
+  "/api/v0/users/{id}":
+    get:
+      summary: Retrieves a user
+      tags:
+      - Users
+      - Another Tag
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: hotel found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  username:
+                    type: string
+                  email:
+                    type: string
+                  role:
+                    type: string
+                  password:
+                    type: string
+                  created_at:
+                    type: timestamps
+                  updated_at:
+                    type: timestamps
+                required:
+                - id
+                - username
+                - email
+                - role
+                - password
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  username:
+                    type: string
+                  email:
+                    type: string
+                  role:
+                    type: string
+                  password:
+                    type: string
+                  created_at:
+                    type: timestamps
+                  updated_at:
+                    type: timestamps
+                required:
+                - id
+                - username
+                - email
+                - role
+                - password
+        '404':
+          description: hotel not found
+        '406':
+          description: unsupported accept header
   "/api/v1/hotels":
     post:
       summary: Creates a hotel
