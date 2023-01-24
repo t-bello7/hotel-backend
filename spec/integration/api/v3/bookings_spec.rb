@@ -11,10 +11,11 @@ describe 'Bookings API' do
       parameter name: :booking, in: :body, schema: {
         type: :object,                
         properties: {
-          days: { type: :string },
+          days: { type: :integer },
           booking_date: { type: :datetime },
           amount: { type: :float },        
-          room_id: { type: :bigint }                   
+          room_id: { type: :bigint },
+          user_id: { type: :bigint },
         },
         required: [ 'days', 'booking_date', 'amount', 'user_id', 'room_id' ]
       }

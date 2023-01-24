@@ -334,12 +334,14 @@ paths:
               type: object
               properties:
                 days:
-                  type: string
+                  type: integer
                 booking_date:
                   type: datetime
                 amount:
                   type: float
                 room_id:
+                  type: bigint
+                user_id:
                   type: bigint
               required:
               - days
