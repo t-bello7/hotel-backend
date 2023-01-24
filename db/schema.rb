@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_230_117_064_904) do
+ActiveRecord::Schema[7.0].define(version: 20_230_117_063_415) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -19,16 +19,18 @@ ActiveRecord::Schema[7.0].define(version: 20_230_117_064_904) do
     t.datetime 'booking_date'
     t.float 'amount'
     t.bigint 'user_id', null: false
+    t.bigint 'room_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.index ['room_id'], name: 'index_bookings_on_room_id'
     t.index ['user_id'], name: 'index_bookings_on_user_id'
   end
 
   create_table 'hotels', force: :cascade do |t|
-    t.text 'name'
-    t.text 'location'
-    t.text 'email'
-    t.text 'phone_number'
+    t.string 'name'
+    t.string 'location'
+    t.string 'email'
+    t.string 'phone_number'
     t.bigint 'user_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
@@ -36,8 +38,8 @@ ActiveRecord::Schema[7.0].define(version: 20_230_117_064_904) do
   end
 
   create_table 'rooms', force: :cascade do |t|
-    t.text 'name'
-    t.string 'type'
+    t.string 'name'
+    t.string 'room_type'
     t.integer 'bed_count'
     t.float 'price'
     t.boolean 'reserved'
@@ -45,8 +47,6 @@ ActiveRecord::Schema[7.0].define(version: 20_230_117_064_904) do
     t.integer 'number'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.bigint 'booking_id', null: false
-    t.index ['booking_id'], name: 'index_rooms_on_booking_id'
     t.index ['hotel_id'], name: 'index_rooms_on_hotel_id'
   end
 
@@ -64,8 +64,8 @@ ActiveRecord::Schema[7.0].define(version: 20_230_117_064_904) do
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end
 
+  add_foreign_key 'bookings', 'rooms'
   add_foreign_key 'bookings', 'users'
   add_foreign_key 'hotels', 'users'
-  add_foreign_key 'rooms', 'bookings'
   add_foreign_key 'rooms', 'hotels'
 end

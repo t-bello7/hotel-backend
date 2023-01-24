@@ -12,9 +12,9 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe '/bookings', type: :request do
+RSpec.describe '/api/v1/hotels', type: :request do
   # This should return the minimal set of attributes required to create a valid
-  # Booking. As you add validations to Booking, be sure to
+  # Api::V1::Hotel. As you add validations to Api::V1::Hotel, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
     skip('Add a hash of attributes valid for your model')
@@ -26,7 +26,7 @@ RSpec.describe '/bookings', type: :request do
 
   # This should return the minimal set of values that should be in the headers
   # in order to pass any filters (e.g. authentication) defined in
-  # BookingsController, or in your router and rack
+  # Api::V1::HotelsController, or in your router and rack
   # middleware. Be sure to keep this updated too.
   let(:valid_headers) do
     {}
@@ -34,48 +34,48 @@ RSpec.describe '/bookings', type: :request do
 
   describe 'GET /index' do
     it 'renders a successful response' do
-      Booking.create! valid_attributes
-      get bookings_url, headers: valid_headers, as: :json
+      Hotel.create! valid_attributes
+      get api_v1_hotels_url, headers: valid_headers, as: :json
       expect(response).to be_successful
     end
   end
 
   describe 'GET /show' do
     it 'renders a successful response' do
-      booking = Booking.create! valid_attributes
-      get booking_url(booking), as: :json
+      hotel = Hotel.create! valid_attributes
+      get api_v1_hotel_url(hotel), as: :json
       expect(response).to be_successful
     end
   end
 
   describe 'POST /create' do
     context 'with valid parameters' do
-      it 'creates a new Booking' do
+      it 'creates a new Api::V1::Hotel' do
         expect do
-          post bookings_url,
-               params: { booking: valid_attributes }, headers: valid_headers, as: :json
-        end.to change(Booking, :count).by(1)
+          post api_v1_hotels_url,
+               params: { api_v1_hotel: valid_attributes }, headers: valid_headers, as: :json
+        end.to change(Hotel, :count).by(1)
       end
 
-      it 'renders a JSON response with the new booking' do
-        post bookings_url,
-             params: { booking: valid_attributes }, headers: valid_headers, as: :json
+      it 'renders a JSON response with the new api_v1_hotel' do
+        post api_v1_hotels_url,
+             params: { api_v1_hotel: valid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:created)
         expect(response.content_type).to match(a_string_including('application/json'))
       end
     end
 
     context 'with invalid parameters' do
-      it 'does not create a new Booking' do
+      it 'does not create a new Api::V1::Hotel' do
         expect do
-          post bookings_url,
-               params: { booking: invalid_attributes }, as: :json
-        end.to change(Booking, :count).by(0)
+          post api_v1_hotels_url,
+               params: { api_v1_hotel: invalid_attributes }, as: :json
+        end.to change(Hotel, :count).by(0)
       end
 
-      it 'renders a JSON response with errors for the new booking' do
-        post bookings_url,
-             params: { booking: invalid_attributes }, headers: valid_headers, as: :json
+      it 'renders a JSON response with errors for the new api_v1_hotel' do
+        post api_v1_hotels_url,
+             params: { api_v1_hotel: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to match(a_string_including('application/json'))
       end
@@ -88,28 +88,28 @@ RSpec.describe '/bookings', type: :request do
         skip('Add a hash of attributes valid for your model')
       end
 
-      it 'updates the requested booking' do
-        booking = Booking.create! valid_attributes
-        patch booking_url(booking),
-              params: { booking: new_attributes }, headers: valid_headers, as: :json
-        booking.reload
+      it 'updates the requested api_v1_hotel' do
+        hotel = Hotel.create! valid_attributes
+        patch api_v1_hotel_url(hotel),
+              params: { api_v1_hotel: new_attributes }, headers: valid_headers, as: :json
+        hotel.reload
         skip('Add assertions for updated state')
       end
 
-      it 'renders a JSON response with the booking' do
-        booking = Booking.create! valid_attributes
-        patch booking_url(booking),
-              params: { booking: new_attributes }, headers: valid_headers, as: :json
+      it 'renders a JSON response with the api_v1_hotel' do
+        hotel = Hotel.create! valid_attributes
+        patch api_v1_hotel_url(hotel),
+              params: { api_v1_hotel: new_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to match(a_string_including('application/json'))
       end
     end
 
     context 'with invalid parameters' do
-      it 'renders a JSON response with errors for the booking' do
-        booking = Booking.create! valid_attributes
-        patch booking_url(booking),
-              params: { booking: invalid_attributes }, headers: valid_headers, as: :json
+      it 'renders a JSON response with errors for the api_v1_hotel' do
+        hotel = Hotel.create! valid_attributes
+        patch api_v1_hotel_url(hotel),
+              params: { api_v1_hotel: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to match(a_string_including('application/json'))
       end
@@ -117,11 +117,11 @@ RSpec.describe '/bookings', type: :request do
   end
 
   describe 'DELETE /destroy' do
-    it 'destroys the requested booking' do
-      booking = Booking.create! valid_attributes
+    it 'destroys the requested api_v1_hotel' do
+      hotel = Hotel.create! valid_attributes
       expect do
-        delete booking_url(booking), headers: valid_headers, as: :json
-      end.to change(Booking, :count).by(-1)
+        delete api_v1_hotel_url(hotel), headers: valid_headers, as: :json
+      end.to change(Hotel, :count).by(-1)
     end
   end
 end

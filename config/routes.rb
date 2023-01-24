@@ -1,11 +1,28 @@
 Rails.application.routes.draw do
-  resources :bookings
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
-  resources :hotels
-  devise_for :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  devise_for :users
+
+  namespace :api do
+    namespace :v0 do
+      resources :users do
+        resources :hotels
+        resources :bookings
+      end
+    end
+    namespace :v3 do
+      resources :bookings
+    end
+    namespace :v2 do
+      resources :rooms do
+        resources :bookings
+      end
+    end
+    namespace :v1 do
+      resources :hotels do
+        resources :rooms
+      end
+    end
+  end
 end
