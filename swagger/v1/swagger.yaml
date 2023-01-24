@@ -36,6 +36,7 @@ paths:
               - location
               - email
               - phone_number
+              - user_id
   "/api/v1/hotels/{id}":
     get:
       summary: Retrieves a hotel
@@ -66,6 +67,8 @@ paths:
                     type: string
                   phone_number:
                     type: integer
+                  user_id:
+                    type: integer
                   created_at:
                     type: timestamps
                   updated_at:
@@ -90,6 +93,8 @@ paths:
                   email:
                     type: string
                   phone_number:
+                    type: integer
+                  user_id:
                     type: integer
                   created_at:
                     type: timestamps

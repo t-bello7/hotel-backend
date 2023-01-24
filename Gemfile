@@ -41,6 +41,8 @@ gem 'active_model_serializers', '~> 0.10.13'
 # Use Devise for authentication
 gem 'devise'
 
+gem 'rack-cors', '~> 1.1', '>= 1.1.1'
+
 # Use cancancan for authorization
 gem 'cancancan'
 
