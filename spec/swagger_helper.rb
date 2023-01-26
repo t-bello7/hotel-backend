@@ -22,7 +22,12 @@ RSpec.configure do |config|
       paths: {},
       servers: [
         {
-          url: Rails.application.credentials.dig(:host, :defaultUrl)
+          url: 'http://{defaultHost}',
+          variables: {
+            defaultHost: {
+              default: "localhost:3000"
+            }
+          }
         }
       ]
     }

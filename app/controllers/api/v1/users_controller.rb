@@ -16,9 +16,9 @@ class Api::V1::UsersController < ApplicationController
   # POST /api/v1/users
   def create
     @api_v1_user = User.new(api_v1_user_params)
-    puts api_v1_user_params
+    puts @api_v1_user.save
     if @api_v1_user.save
-      render json: @api_v1_user, status: :created, location: @api_v1_user
+      render json: @api_v1_user, status: :created
     else
       render json: @api_v1_user.errors, status: :unprocessable_entity
     end
