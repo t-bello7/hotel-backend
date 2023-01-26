@@ -2,8 +2,6 @@ Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/'
   mount Rswag::Api::Engine => '/'
 
-  post 'authentication/login', 'authentication#login'
-
   namespace :api do
     namespace :v1 do
       resources :rooms do
@@ -17,7 +15,7 @@ Rails.application.routes.draw do
         resources :rooms
       end
       resources :bookings
-      resources :sessions, only: %i[create destroy]
+      post '/auth/login', to: 'authentication#login'
     end
   end
 end

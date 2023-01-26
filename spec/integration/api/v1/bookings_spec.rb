@@ -32,7 +32,7 @@ describe 'Bookings API' do
 
   path '/api/v1/bookings/{id}' do
     get 'Retrieves a booking' do
-      tags 'Bookings', 'Another Tag'
+      tags 'Bookings'
       produces 'application/json', 'application/xml'
       parameter name: :id, in: :path, type: :string
       request_body_example value: { some_field: 'Foo' }, name: 'basic', summary: 'Request example description'
@@ -63,6 +63,52 @@ describe 'Bookings API' do
         let(:Accept) { 'application/foo' }
         run_test!
       end
+    end
+  end
+
+  path '/api/v1/bookings/{id}' do
+    patch 'Updates a booking' do
+      tags 'Bookings'
+      produces 'application/json', 'application/xml'
+      parameter name: :id, in: :path, type: :string
+      request_body_example value: { some_field: 'Foo' }, name: 'basic', summary: 'Request example description'
+
+      response '200', 'booking found' do
+        schema type: :object,
+               properties: {
+                 id: { type: :integer },
+                 days: { type: :string },
+                 booking_date: { type: :datetime },
+                 amount: { type: :float },
+                 room_id: { type: :bigint },
+                 created_at: { type: :timestamps },
+                 updated_at: { type: :timestamps }
+               },
+               required: %w[id name location email phone_number room_id]
+
+        let(:id) { Booking.create(name: 'foo', location: 'location address', email: 'example.com', phone_number: '23490567432').id }
+        run_test!
+      end
+
+      response '404', 'booking not found' do
+        let(:id) { 'invalid' }
+        run_test!
+      end
+
+      response '406', 'unsupported accept header' do
+        let(:Accept) { 'application/foo' }
+        run_test!
+      end
+    end
+  end
+
+  path '/api/v1/bookings/{id}' do
+    delete 'Retrieves a booking' do
+      tags 'Bookings'
+      produces 'application/json', 'application/xml'
+      request_body_example value: { some_field: 'Foo' }, name: 'basic', summary: 'Request example description'
+      response '200', 'booking deleted'
+
     end
   end
 end

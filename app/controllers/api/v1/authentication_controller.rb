@@ -1,4 +1,4 @@
-class AuthenticationController < ApplicationController
+class Api::V1::AuthenticationController < ApplicationController
   # frozen_string_literal: true
 
   skip_before_action :authenticate_request

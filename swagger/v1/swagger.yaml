@@ -42,7 +42,74 @@ paths:
       summary: Retrieves a booking
       tags:
       - Bookings
-      - Another Tag
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: booking found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  days:
+                    type: string
+                  booking_date:
+                    type: datetime
+                  amount:
+                    type: float
+                  room_id:
+                    type: bigint
+                  created_at:
+                    type: timestamps
+                  updated_at:
+                    type: timestamps
+                required:
+                - id
+                - name
+                - location
+                - email
+                - phone_number
+                - room_id
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  days:
+                    type: string
+                  booking_date:
+                    type: datetime
+                  amount:
+                    type: float
+                  room_id:
+                    type: bigint
+                  created_at:
+                    type: timestamps
+                  updated_at:
+                    type: timestamps
+                required:
+                - id
+                - name
+                - location
+                - email
+                - phone_number
+                - room_id
+        '404':
+          description: booking not found
+        '406':
+          description: unsupported accept header
+    patch:
+      summary: Updates a booking
+      tags:
+      - Bookings
       parameters:
       - name: id
         in: path
@@ -145,7 +212,6 @@ paths:
       summary: Retrieves a hotel
       tags:
       - Hotels
-      - Another Tag
       parameters:
       - name: id
         in: path
@@ -252,7 +318,6 @@ paths:
       summary: Retrieves a room
       tags:
       - Rooms
-      - Another Tag
       parameters:
       - name: id
         in: path
@@ -356,7 +421,6 @@ paths:
       summary: Retrieves a user
       tags:
       - Users
-      - Another Tag
       parameters:
       - name: id
         in: path

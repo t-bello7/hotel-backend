@@ -31,7 +31,7 @@ describe 'Users API' do
 
   path '/api/v1/users/{id}' do
     get 'Retrieves a user' do
-      tags 'Users', 'Another Tag'
+      tags 'Users'
       produces 'application/json', 'application/xml'
       parameter name: :id, in: :path, type: :string
       request_body_example value: { some_field: 'Foo' }, name: 'basic', summary: 'Request example description'

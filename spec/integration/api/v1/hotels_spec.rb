@@ -32,7 +32,7 @@ describe 'Hotels API' do
 
   path '/api/v1/hotels/{id}' do
     get 'Retrieves a hotel' do
-      tags 'Hotels', 'Another Tag'
+      tags 'Hotels'
       produces 'application/json', 'application/xml'
       parameter name: :id, in: :path, type: :string
       request_body_example value: { some_field: 'Foo' }, name: 'basic', summary: 'Request example description'
