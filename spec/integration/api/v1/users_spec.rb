@@ -2,7 +2,7 @@
 require 'swagger_helper'
 
 describe 'Users API' do
-  path '/api/v0/users' do
+  path '/api/v1/users' do
     post 'Creates a user' do
       tags 'Users'
       consumes 'application/json'
@@ -29,7 +29,7 @@ describe 'Users API' do
     end
   end
 
-  path '/api/v0/users/{id}' do
+  path '/api/v1/users/{id}' do
     get 'Retrieves a user' do
       tags 'Users', 'Another Tag'
       produces 'application/json', 'application/xml'

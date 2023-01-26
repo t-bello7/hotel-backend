@@ -4,15 +4,15 @@ info:
   title: API V1
   version: v1
 paths:
-  "/api/v0/users":
+  "/api/v1/bookings":
     post:
-      summary: Creates a user
+      summary: Creates a room
       tags:
-      - Users
+      - Bookings
       parameters: []
       responses:
         '201':
-          description: hotel created
+          description: booking created
         '422':
           description: invalid request
       requestBody:
@@ -21,24 +21,27 @@ paths:
             schema:
               type: object
               properties:
-                username:
-                  type: string
-                email:
-                  type: string
-                role:
-                  type: string
-                password:
-                  type: string
+                days:
+                  type: integer
+                booking_date:
+                  type: datetime
+                amount:
+                  type: float
+                room_id:
+                  type: bigint
+                user_id:
+                  type: bigint
               required:
-              - username
-              - email
-              - role
-              - password
-  "/api/v0/users/{id}":
+              - days
+              - booking_date
+              - amount
+              - user_id
+              - room_id
+  "/api/v1/bookings/{id}":
     get:
-      summary: Retrieves a user
+      summary: Retrieves a booking
       tags:
-      - Users
+      - Bookings
       - Another Tag
       parameters:
       - name: id
@@ -48,7 +51,7 @@ paths:
           type: string
       responses:
         '200':
-          description: hotel found
+          description: booking found
           content:
             application/json:
               schema:
@@ -56,50 +59,52 @@ paths:
                 properties:
                   id:
                     type: integer
-                  username:
+                  days:
                     type: string
-                  email:
-                    type: string
-                  role:
-                    type: string
-                  password:
-                    type: string
+                  booking_date:
+                    type: datetime
+                  amount:
+                    type: float
+                  room_id:
+                    type: bigint
                   created_at:
                     type: timestamps
                   updated_at:
                     type: timestamps
                 required:
                 - id
-                - username
+                - name
+                - location
                 - email
-                - role
-                - password
+                - phone_number
+                - room_id
             application/xml:
               schema:
                 type: object
                 properties:
                   id:
                     type: integer
-                  username:
+                  days:
                     type: string
-                  email:
-                    type: string
-                  role:
-                    type: string
-                  password:
-                    type: string
+                  booking_date:
+                    type: datetime
+                  amount:
+                    type: float
+                  room_id:
+                    type: bigint
                   created_at:
                     type: timestamps
                   updated_at:
                     type: timestamps
                 required:
                 - id
-                - username
+                - name
+                - location
                 - email
-                - role
-                - password
+                - phone_number
+                - room_id
         '404':
-          description: hotel not found
+          description: booking not found
         '406':
           description: unsupported accept header
   "/api/v1/hotels":
@@ -209,7 +214,7 @@ paths:
           description: hotel not found
         '406':
           description: unsupported accept header
-  "/api/v2/rooms":
+  "/api/v1/rooms":
     post:
       summary: Creates a room
       tags:
@@ -316,11 +321,11 @@ paths:
           description: hotel not found
         '406':
           description: unsupported accept header
-  "/api/v3/bookings":
+  "/api/v1/users":
     post:
-      summary: Creates a room
+      summary: Creates a user
       tags:
-      - Bookings
+      - Users
       parameters: []
       responses:
         '201':
@@ -333,27 +338,24 @@ paths:
             schema:
               type: object
               properties:
-                days:
-                  type: integer
-                booking_date:
-                  type: datetime
-                amount:
-                  type: float
-                room_id:
-                  type: bigint
-                user_id:
-                  type: bigint
+                username:
+                  type: string
+                email:
+                  type: string
+                role:
+                  type: string
+                password:
+                  type: string
               required:
-              - days
-              - booking_date
-              - amount
-              - user_id
-              - room_id
-  "/api/v3/bookings/{id}":
+              - username
+              - email
+              - role
+              - password
+  "/api/v1/users/{id}":
     get:
-      summary: Retrieves a booking
+      summary: Retrieves a user
       tags:
-      - Bookings
+      - Users
       - Another Tag
       parameters:
       - name: id
@@ -363,7 +365,7 @@ paths:
           type: string
       responses:
         '200':
-          description: booking found
+          description: hotel found
           content:
             application/json:
               schema:
@@ -371,56 +373,54 @@ paths:
                 properties:
                   id:
                     type: integer
-                  days:
+                  username:
                     type: string
-                  booking_date:
-                    type: datetime
-                  amount:
-                    type: float
-                  room_id:
-                    type: bigint
+                  email:
+                    type: string
+                  role:
+                    type: string
+                  password:
+                    type: string
                   created_at:
                     type: timestamps
                   updated_at:
                     type: timestamps
                 required:
                 - id
-                - name
-                - location
+                - username
                 - email
-                - phone_number
-                - room_id
+                - role
+                - password
             application/xml:
               schema:
                 type: object
                 properties:
                   id:
                     type: integer
-                  days:
+                  username:
                     type: string
-                  booking_date:
-                    type: datetime
-                  amount:
-                    type: float
-                  room_id:
-                    type: bigint
+                  email:
+                    type: string
+                  role:
+                    type: string
+                  password:
+                    type: string
                   created_at:
                     type: timestamps
                   updated_at:
                     type: timestamps
                 required:
                 - id
-                - name
-                - location
+                - username
                 - email
-                - phone_number
-                - room_id
+                - role
+                - password
         '404':
-          description: booking not found
+          description: hotel not found
         '406':
           description: unsupported accept header
 servers:
-- url: https://{defaultHost}
+- url: http://{defaultHost}
   variables:
     defaultHost:
-      default: localhost.com
+      default: localhost:3000

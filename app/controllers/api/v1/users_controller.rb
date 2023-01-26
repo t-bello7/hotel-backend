@@ -17,7 +17,6 @@ class Api::V1::UsersController < ApplicationController
   # POST /api/v1/users
   def create
     @api_v1_user = User.new(api_v1_user_params)
-
     if @api_v1_user.save
       render json: @api_v1_user, status: :created
     else

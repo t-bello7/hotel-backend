@@ -1,4 +1,4 @@
-class Api::V!::BookingsController < ApplicationController
+class Api::V1::BookingsController < ApplicationController
   before_action :set_api_v1_booking, only: %i[show update destroy]
 
   # GET /api/v1/bookings

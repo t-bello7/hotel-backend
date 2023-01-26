@@ -2,7 +2,7 @@
 require 'swagger_helper'
 
 describe 'Bookings API' do
-  path '/api/v3/bookings' do
+  path '/api/v1/bookings' do
     post 'Creates a room' do
       tags 'Bookings'
       consumes 'application/json'
@@ -18,7 +18,7 @@ describe 'Bookings API' do
         required: %w[days booking_date amount user_id room_id]
       }
 
-      response '201', 'hotel created' do
+      response '201', 'booking created' do
         let(:booking) { { days: 5, booking_date: '2023-14-05', amount: 60 } }
         run_test!
       end
@@ -30,7 +30,7 @@ describe 'Bookings API' do
     end
   end
 
-  path '/api/v3/bookings/{id}' do
+  path '/api/v1/bookings/{id}' do
     get 'Retrieves a booking' do
       tags 'Bookings', 'Another Tag'
       produces 'application/json', 'application/xml'
