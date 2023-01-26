@@ -1,16 +1,16 @@
 Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/api-docs'
-  mount Rswag::Api::Engine => '/api-docs'      
-  
+  mount Rswag::Api::Engine => '/api-docs'
+
   post 'authentication/login', 'authentication#login'
-  
-  namespace :api do 
-    namespace :v0 do      
+
+  namespace :api do
+    namespace :v0 do
       resources :users do
         resources :hotels
         resources :bookings
       end
-    end     
+    end
     namespace :v3 do
       resources :bookings
     end

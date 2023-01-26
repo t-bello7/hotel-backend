@@ -11,11 +11,11 @@ class Api::V2::RoomsController < ApplicationController
   # GET /api/v2/rooms/1
   def show
     render json: @api_v2_room
-  end 
- 
+  end
+
   # POST /api/v2/rooms
-  def create        
-    @api_v2_room = Room.new(api_v2_room_params)         
+  def create
+    @api_v2_room = Room.new(api_v2_room_params)
 
     if @api_v2_room.save
       render json: @api_v2_room, status: :created

@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  require "securerandom"
+  require 'securerandom'
 
   has_secure_password
 
@@ -10,7 +10,6 @@ class User < ApplicationRecord
   validates :role, presence: true
   validates :password, presence: true
   validates :username, presence: true, uniqueness: true, length: { in: 1..250 }
-
 
   ROLES = %i[admin default].freeze
 
