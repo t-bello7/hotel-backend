@@ -11,14 +11,14 @@ class Api::V2::RoomsController < ApplicationController
   # GET /api/v2/rooms/1
   def show
     render json: @api_v2_room
-  end
-
+  end 
+ 
   # POST /api/v2/rooms
-  def create
-    @api_v2_room = Room.new(api_v2_room_params)
+  def create        
+    @api_v2_room = Room.new(api_v2_room_params)         
 
     if @api_v2_room.save
-      render json: @api_v2_room, status: :created, location: @api_v2_room
+      render json: @api_v2_room, status: :created
     else
       render json: @api_v2_room.errors, status: :unprocessable_entity
     end
@@ -47,6 +47,6 @@ class Api::V2::RoomsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def api_v2_room_params
-    params.fetch(:api_v2_room, {})
+    params.permit(:name, :room_type, :bed_count, :price, :reserved, :number, :hotel_id)
   end
 end

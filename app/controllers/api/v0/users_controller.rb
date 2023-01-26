@@ -1,4 +1,5 @@
 class Api::V0::UsersController < ApplicationController
+  skip_before_action :authenticate_request, only: [:create]
   before_action :set_api_v0_user, only: %i[show update destroy]
 
   # GET /api/v0/users
@@ -18,7 +19,7 @@ class Api::V0::UsersController < ApplicationController
     @api_v0_user = User.new(api_v0_user_params)
 
     if @api_v0_user.save
-      render json: @api_v0_user, status: :created, location: @api_v0_user
+      render json: @api_v0_user, status: :created
     else
       render json: @api_v0_user.errors, status: :unprocessable_entity
     end
@@ -47,6 +48,6 @@ class Api::V0::UsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def api_v0_user_params
-    params.fetch(:api_v0_user, {})
-  end
+    params.permit(:username, :email, :password, :role)
+  end  
 end

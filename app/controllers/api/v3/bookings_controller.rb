@@ -15,10 +15,11 @@ class Api::V3::BookingsController < ApplicationController
 
   # POST /api/v3/bookings
   def create
-    @api_v3_booking = Api::V3::Booking.new(api_v3_booking_params)
+    @api_v3_booking = Booking.new(api_v3_booking_params)
+    @api_v3_booking.user_id = @current_user.id
 
     if @api_v3_booking.save
-      render json: @api_v3_booking, status: :created, location: @api_v3_booking
+      render json: @api_v3_booking, status: :created
     else
       render json: @api_v3_booking.errors, status: :unprocessable_entity
     end
@@ -42,11 +43,11 @@ class Api::V3::BookingsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_api_v3_booking
-    @api_v3_booking = Api::V3::Booking.find(params[:id])
+    @api_v3_booking = Booking.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
   def api_v3_booking_params
-    params.fetch(:api_v3_booking, {})
+    params.permit(:days, :booking_date, :amount, :room_id, :hotel_id)
   end
 end

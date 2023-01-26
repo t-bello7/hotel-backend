@@ -1,15 +1,16 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  require "securerandom"
+
+  has_secure_password
+
   has_many :bookings
   has_many :hotels
-  validates :role, presence: true
-  validates :username, presence: true, length: { in: 1..250 }
 
-  # User::Roles
-  # The available roles
+  validates :email, presence: true, uniqueness: true
+  validates :role, presence: true
+  validates :password, presence: true
+  validates :username, presence: true, uniqueness: true, length: { in: 1..250 }
+
 
   ROLES = %i[admin default].freeze
 
