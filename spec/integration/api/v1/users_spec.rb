@@ -2,7 +2,7 @@
 require 'swagger_helper'
 
 describe 'Users API' do
-  path '/api/v0/users' do
+  path '/api/v1/users' do
     post 'Creates a user' do
       tags 'Users'
       consumes 'application/json'
@@ -12,13 +12,14 @@ describe 'Users API' do
           username: { type: :string },
           email: { type: :string },
           role: { type: :string },
-          password: { type: :string }
+          password: { type: :string },
+          password_confirmation: { type: :string }
         },
-        required: %w[username email role password]
+        required: %w[username email role password password_confirmation]
       }
 
       response '201', 'hotel created' do
-        let(:user) { { username: 'foo', email: 'www.example.com', role: 'user', password: 1234 } }
+        let(:user) { { username: 'foo', email: 'www.example.com', role: 'user', password: 1234, password_confirmation: 1234 } }
         run_test!
       end
 
@@ -29,7 +30,7 @@ describe 'Users API' do
     end
   end
 
-  path '/api/v0/users/{id}' do
+  path '/api/v1/users/{id}' do
     get 'Retrieves a user' do
       tags 'Users', 'Another Tag'
       produces 'application/json', 'application/xml'
@@ -49,7 +50,7 @@ describe 'Users API' do
                },
                required: %w[id username email role password]
 
-        let(:id) { User.create(username: 'foo', email: 'www.example.com', role: 'user', paaword: '1234').id }
+        let(:id) { User.create(username: 'foo', email: 'www.example.com', role: 'user', password: '1234').id }
         run_test!
       end
 

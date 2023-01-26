@@ -22,12 +22,7 @@ RSpec.configure do |config|
       paths: {},
       servers: [
         {
-          url: 'https://{defaultHost}',
-          variables: {
-            defaultHost: {
-              default: 'www.example.com'
-            }
-          }
+          url: Rails.application.credentials.dig(:host, :defaultUrl)
         }
       ]
     }

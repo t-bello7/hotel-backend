@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::V2::RoomsController, type: :routing do
+RSpec.describe Api::V1::RoomsController, type: :routing do
   describe 'routing' do
     it 'routes to #index' do
       expect(get: '/api/v2/rooms').to route_to('api/v2/rooms#index')

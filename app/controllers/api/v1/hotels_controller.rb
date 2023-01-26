@@ -15,7 +15,7 @@ class Api::V1::HotelsController < ApplicationController
 
   # POST /api/v1/hotels
   def create
-    @api_v1_hotel = Hotel.new(api_v1_hotel_params)
+    @api_v1_hotel = current_user.hotels.create(api_v1_hotel_params)
 
     if @api_v1_hotel.save
       render json: @api_v1_hotel, status: :created, location: @api_v1_hotel

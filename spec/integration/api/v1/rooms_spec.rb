@@ -2,7 +2,7 @@
 require 'swagger_helper'
 
 describe 'Rooms API' do
-  path '/api/v2/rooms' do
+  path '/api/v1/rooms' do
     post 'Creates a room' do
       tags 'Rooms'
       consumes 'application/json'

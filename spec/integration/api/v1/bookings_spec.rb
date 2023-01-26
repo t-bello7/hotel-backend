@@ -2,7 +2,7 @@
 require 'swagger_helper'
 
 describe 'Bookings API' do
-  path '/api/v3/bookings' do
+  path '/api/v1/bookings' do
     post 'Creates a room' do
       tags 'Bookings'
       consumes 'application/json'
@@ -30,7 +30,7 @@ describe 'Bookings API' do
     end
   end
 
-  path '/api/v3/bookings/{id}' do
+  path '/api/v1/bookings/{id}' do
     get 'Retrieves a booking' do
       tags 'Bookings', 'Another Tag'
       produces 'application/json', 'application/xml'
