@@ -108,7 +108,6 @@ describe 'Bookings API' do
       produces 'application/json', 'application/xml'
       request_body_example value: { some_field: 'Foo' }, name: 'basic', summary: 'Request example description'
       response '200', 'booking deleted'
-
     end
   end
 end
