@@ -4,7 +4,6 @@ class Api::V1::HotelsController < ApplicationController
   # GET /api/v1/hotels
   def index
     @api_v1_hotels = Hotel.all
-
     render json: @api_v1_hotels
   end
 
@@ -16,9 +15,10 @@ class Api::V1::HotelsController < ApplicationController
   # POST /api/v1/hotels
   def create
     @api_v1_hotel = Hotel.new(api_v1_hotel_params)
+    @api_v1_hotel.user_id = @current_user.id
 
     if @api_v1_hotel.save
-      render json: @api_v1_hotel, status: :created, location: @api_v1_hotel
+      render json: @api_v1_hotel, status: :created
     else
       render json: @api_v1_hotel.errors, status: :unprocessable_entity
     end
@@ -47,6 +47,6 @@ class Api::V1::HotelsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def api_v1_hotel_params
-    params.fetch(:api_v1_hotel, {})
+    params.permit(:name, :location, :email, :phone_number)
   end
 end

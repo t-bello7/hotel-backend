@@ -4,319 +4,7 @@ info:
   title: API V1
   version: v1
 paths:
-  "/api/v0/users":
-    post:
-      summary: Creates a user
-      tags:
-      - Users
-      parameters: []
-      responses:
-        '201':
-          description: hotel created
-        '422':
-          description: invalid request
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                username:
-                  type: string
-                email:
-                  type: string
-                role:
-                  type: string
-                password:
-                  type: string
-              required:
-              - username
-              - email
-              - role
-              - password
-  "/api/v0/users/{id}":
-    get:
-      summary: Retrieves a user
-      tags:
-      - Users
-      - Another Tag
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: hotel found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  username:
-                    type: string
-                  email:
-                    type: string
-                  role:
-                    type: string
-                  password:
-                    type: string
-                  created_at:
-                    type: timestamps
-                  updated_at:
-                    type: timestamps
-                required:
-                - id
-                - username
-                - email
-                - role
-                - password
-            application/xml:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  username:
-                    type: string
-                  email:
-                    type: string
-                  role:
-                    type: string
-                  password:
-                    type: string
-                  created_at:
-                    type: timestamps
-                  updated_at:
-                    type: timestamps
-                required:
-                - id
-                - username
-                - email
-                - role
-                - password
-        '404':
-          description: hotel not found
-        '406':
-          description: unsupported accept header
-  "/api/v1/hotels":
-    post:
-      summary: Creates a hotel
-      tags:
-      - Hotels
-      parameters: []
-      responses:
-        '201':
-          description: hotel created
-        '422':
-          description: invalid request
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                location:
-                  type: string
-                email:
-                  type: string
-                phone_number:
-                  type: integer
-                user_id:
-                  type: bigint
-              required:
-              - name
-              - location
-              - email
-              - phone_number
-              - user_id
-  "/api/v1/hotels/{id}":
-    get:
-      summary: Retrieves a hotel
-      tags:
-      - Hotels
-      - Another Tag
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: hotel found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-                  location:
-                    type: string
-                  email:
-                    type: string
-                  phone_number:
-                    type: integer
-                  user_id:
-                    type: integer
-                  created_at:
-                    type: timestamps
-                  updated_at:
-                    type: timestamps
-                required:
-                - id
-                - name
-                - location
-                - email
-                - phone_number
-                - user_id: 1
-            application/xml:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-                  location:
-                    type: string
-                  email:
-                    type: string
-                  phone_number:
-                    type: integer
-                  user_id:
-                    type: integer
-                  created_at:
-                    type: timestamps
-                  updated_at:
-                    type: timestamps
-                required:
-                - id
-                - name
-                - location
-                - email
-                - phone_number
-                - user_id: 1
-        '404':
-          description: hotel not found
-        '406':
-          description: unsupported accept header
-  "/api/v2/rooms":
-    post:
-      summary: Creates a room
-      tags:
-      - Rooms
-      parameters: []
-      responses:
-        '201':
-          description: room created
-        '422':
-          description: invalid request
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                type:
-                  type: string
-                bed_count:
-                  type: integer
-                price:
-                  type: float
-                hotel_id:
-                  type: bigint
-              required:
-              - name
-              - type
-              - bed_count
-              - price
-              - hotel_id
-  "/api/v1/rooms/{id}":
-    get:
-      summary: Retrieves a room
-      tags:
-      - Rooms
-      - Another Tag
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: hotel found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-                  type:
-                    type: string
-                  bed_count:
-                    type: integer
-                  price:
-                    type: float
-                  hotel_id:
-                    type: bigint
-                  created_at:
-                    type: timestamps
-                  updated_at:
-                    type: timestamps
-                required:
-                - id
-                - name
-                - location
-                - email
-                - phone_number
-                - hotel_id
-            application/xml:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-                  type:
-                    type: string
-                  bed_count:
-                    type: integer
-                  price:
-                    type: float
-                  hotel_id:
-                    type: bigint
-                  created_at:
-                    type: timestamps
-                  updated_at:
-                    type: timestamps
-                required:
-                - id
-                - name
-                - location
-                - email
-                - phone_number
-                - hotel_id
-        '404':
-          description: hotel not found
-        '406':
-          description: unsupported accept header
-  "/api/v3/bookings":
+  "/api/v1/bookings":
     post:
       summary: Creates a room
       tags:
@@ -324,7 +12,7 @@ paths:
       parameters: []
       responses:
         '201':
-          description: hotel created
+          description: booking created
         '422':
           description: invalid request
       requestBody:
@@ -349,12 +37,11 @@ paths:
               - amount
               - user_id
               - room_id
-  "/api/v3/bookings/{id}":
+  "/api/v1/bookings/{id}":
     get:
       summary: Retrieves a booking
       tags:
       - Bookings
-      - Another Tag
       parameters:
       - name: id
         in: path
@@ -419,8 +106,385 @@ paths:
           description: booking not found
         '406':
           description: unsupported accept header
+    patch:
+      summary: Updates a booking
+      tags:
+      - Bookings
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: booking found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  days:
+                    type: string
+                  booking_date:
+                    type: datetime
+                  amount:
+                    type: float
+                  room_id:
+                    type: bigint
+                  created_at:
+                    type: timestamps
+                  updated_at:
+                    type: timestamps
+                required:
+                - id
+                - name
+                - location
+                - email
+                - phone_number
+                - room_id
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  days:
+                    type: string
+                  booking_date:
+                    type: datetime
+                  amount:
+                    type: float
+                  room_id:
+                    type: bigint
+                  created_at:
+                    type: timestamps
+                  updated_at:
+                    type: timestamps
+                required:
+                - id
+                - name
+                - location
+                - email
+                - phone_number
+                - room_id
+        '404':
+          description: booking not found
+        '406':
+          description: unsupported accept header
+  "/api/v1/hotels":
+    post:
+      summary: Creates a hotel
+      tags:
+      - Hotels
+      parameters: []
+      responses:
+        '201':
+          description: hotel created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                location:
+                  type: string
+                email:
+                  type: string
+                phone_number:
+                  type: integer
+                user_id:
+                  type: bigint
+              required:
+              - name
+              - location
+              - email
+              - phone_number
+              - user_id
+  "/api/v1/hotels/{id}":
+    get:
+      summary: Retrieves a hotel
+      tags:
+      - Hotels
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: hotel found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  location:
+                    type: string
+                  email:
+                    type: string
+                  phone_number:
+                    type: integer
+                  user_id:
+                    type: integer
+                  created_at:
+                    type: timestamps
+                  updated_at:
+                    type: timestamps
+                required:
+                - id
+                - name
+                - location
+                - email
+                - phone_number
+                - user_id: 1
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  location:
+                    type: string
+                  email:
+                    type: string
+                  phone_number:
+                    type: integer
+                  user_id:
+                    type: integer
+                  created_at:
+                    type: timestamps
+                  updated_at:
+                    type: timestamps
+                required:
+                - id
+                - name
+                - location
+                - email
+                - phone_number
+                - user_id: 1
+        '404':
+          description: hotel not found
+        '406':
+          description: unsupported accept header
+  "/api/v1/rooms":
+    post:
+      summary: Creates a room
+      tags:
+      - Rooms
+      parameters: []
+      responses:
+        '201':
+          description: room created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                type:
+                  type: string
+                bed_count:
+                  type: integer
+                price:
+                  type: float
+                hotel_id:
+                  type: bigint
+              required:
+              - name
+              - type
+              - bed_count
+              - price
+              - hotel_id
+  "/api/v1/rooms/{id}":
+    get:
+      summary: Retrieves a room
+      tags:
+      - Rooms
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: hotel found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  type:
+                    type: string
+                  bed_count:
+                    type: integer
+                  price:
+                    type: float
+                  hotel_id:
+                    type: bigint
+                  created_at:
+                    type: timestamps
+                  updated_at:
+                    type: timestamps
+                required:
+                - id
+                - name
+                - location
+                - email
+                - phone_number
+                - hotel_id
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  type:
+                    type: string
+                  bed_count:
+                    type: integer
+                  price:
+                    type: float
+                  hotel_id:
+                    type: bigint
+                  created_at:
+                    type: timestamps
+                  updated_at:
+                    type: timestamps
+                required:
+                - id
+                - name
+                - location
+                - email
+                - phone_number
+                - hotel_id
+        '404':
+          description: hotel not found
+        '406':
+          description: unsupported accept header
+  "/api/v1/users":
+    post:
+      summary: Creates a user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '201':
+          description: hotel created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                role:
+                  type: string
+                password:
+                  type: string
+              required:
+              - username
+              - email
+              - role
+              - password
+  "/api/v1/users/{id}":
+    get:
+      summary: Retrieves a user
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: hotel found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  username:
+                    type: string
+                  email:
+                    type: string
+                  role:
+                    type: string
+                  password:
+                    type: string
+                  created_at:
+                    type: timestamps
+                  updated_at:
+                    type: timestamps
+                required:
+                - id
+                - username
+                - email
+                - role
+                - password
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  username:
+                    type: string
+                  email:
+                    type: string
+                  role:
+                    type: string
+                  password:
+                    type: string
+                  created_at:
+                    type: timestamps
+                  updated_at:
+                    type: timestamps
+                required:
+                - id
+                - username
+                - email
+                - role
+                - password
+        '404':
+          description: hotel not found
+        '406':
+          description: unsupported accept header
 servers:
 - url: https://{defaultHost}
   variables:
     defaultHost:
-      default: www.example.com
+      default: hotel-backend.fly.dev

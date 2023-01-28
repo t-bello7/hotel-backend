@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_230_117_063_415) do
+ActiveRecord::Schema[7.0].define(version: 20_230_125_182_636) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -18,10 +18,12 @@ ActiveRecord::Schema[7.0].define(version: 20_230_117_063_415) do
     t.integer 'days'
     t.datetime 'booking_date'
     t.float 'amount'
-    t.bigint 'user_id', null: false
     t.bigint 'room_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.bigint 'user_id', null: false
+    t.bigint 'hotel_id', null: false
+    t.index ['hotel_id'], name: 'index_bookings_on_hotel_id'
     t.index ['room_id'], name: 'index_bookings_on_room_id'
     t.index ['user_id'], name: 'index_bookings_on_user_id'
   end
@@ -31,9 +33,9 @@ ActiveRecord::Schema[7.0].define(version: 20_230_117_063_415) do
     t.string 'location'
     t.string 'email'
     t.string 'phone_number'
-    t.bigint 'user_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.bigint 'user_id', null: false
     t.index ['user_id'], name: 'index_hotels_on_user_id'
   end
 
@@ -51,19 +53,16 @@ ActiveRecord::Schema[7.0].define(version: 20_230_117_063_415) do
   end
 
   create_table 'users', force: :cascade do |t|
-    t.string 'email', default: '', null: false
-    t.string 'encrypted_password', default: '', null: false
-    t.string 'reset_password_token'
-    t.datetime 'reset_password_sent_at'
-    t.datetime 'remember_created_at'
+    t.string 'username'
+    t.string 'email'
+    t.string 'password'
+    t.string 'role'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.string 'username'
-    t.string 'role'
-    t.index ['email'], name: 'index_users_on_email', unique: true
-    t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
+    t.string 'password_digest'
   end
 
+  add_foreign_key 'bookings', 'hotels'
   add_foreign_key 'bookings', 'rooms'
   add_foreign_key 'bookings', 'users'
   add_foreign_key 'hotels', 'users'

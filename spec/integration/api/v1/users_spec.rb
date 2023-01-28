@@ -1,38 +1,37 @@
 # spec/requests/blogs_spec.rb
 require 'swagger_helper'
 
-describe 'Hotels API' do
-  path '/api/v1/hotels' do
-    post 'Creates a hotel' do
-      tags 'Hotels'
+describe 'Users API' do
+  path '/api/v1/users' do
+    post 'Creates a user' do
+      tags 'Users'
       consumes 'application/json'
-      parameter name: :hotel, in: :body, schema: {
+      parameter name: :user, in: :body, schema: {
         type: :object,
         properties: {
-          name: { type: :string },
-          location: { type: :string },
+          username: { type: :string },
           email: { type: :string },
-          phone_number: { type: :integer },
-          user_id: { type: :bigint }
+          role: { type: :string },
+          password: { type: :string }
         },
-        required: %w[name location email phone_number user_id]
+        required: %w[username email role password]
       }
 
       response '201', 'hotel created' do
-        let(:hotel) { { name: 'foo', location: 'location address', email: 'example.com', phone_number: '23490567432', user_id: 1 } }
+        let(:user) { { username: 'foo', email: 'www.example.com', role: 'user', password: 1234 } }
         run_test!
       end
 
       response '422', 'invalid request' do
-        let(:hotel) { { name: 'foo' } }
+        let(:user) { { username: 'foo' } }
         run_test!
       end
     end
   end
 
-  path '/api/v1/hotels/{id}' do
-    get 'Retrieves a hotel' do
-      tags 'Hotels'
+  path '/api/v1/users/{id}' do
+    get 'Retrieves a user' do
+      tags 'Users'
       produces 'application/json', 'application/xml'
       parameter name: :id, in: :path, type: :string
       request_body_example value: { some_field: 'Foo' }, name: 'basic', summary: 'Request example description'
@@ -41,17 +40,16 @@ describe 'Hotels API' do
         schema type: :object,
                properties: {
                  id: { type: :integer },
-                 name: { type: :string },
-                 location: { type: :string },
+                 username: { type: :string },
                  email: { type: :string },
-                 phone_number: { type: :integer },
-                 user_id: { type: :integer },
+                 role: { type: :string },
+                 password: { type: :string },
                  created_at: { type: :timestamps },
                  updated_at: { type: :timestamps }
                },
-               required: ['id', 'name', 'location', 'email', 'phone_number', { user_id: 1 }]
+               required: %w[id username email role password]
 
-        let(:id) { Hotel.create(name: 'foo', location: 'location address', email: 'example.com', phone_number: '23490567432', user_id: 1).id }
+        let(:id) { User.create(username: 'foo', email: 'www.example.com', role: 'user', paaword: '1234').id }
         run_test!
       end
 
