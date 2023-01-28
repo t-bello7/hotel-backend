@@ -1,4 +1,4 @@
-# fly.toml file generated for hotel-backend on 2023-01-25T18:39:21+01:00
+# fly.toml file generated for hotel-backend on 2023-01-26T13:53:24+01:00
 
 app = "hotel-backend"
 kill_signal = "SIGINT"

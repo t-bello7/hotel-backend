@@ -47,10 +47,6 @@ class Api::V1::RoomsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def api_v1_room_params
-<<<<<<< HEAD
     params.permit(:name, :room_type, :bed_count, :price, :reserved, :number, :hotel_id)
-=======
-    params.fetch(:api_v1_room, {})
->>>>>>> dev
   end
 end
