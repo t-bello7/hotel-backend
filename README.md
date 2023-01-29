@@ -113,12 +113,17 @@ To run the project, execute the following command:
 ```sh
   bin/rails server
 ```
+
+```sh
+  bin/rails db:create 
+  bin/rails db:migrate
+```
 ### Run tests
 
 To run tests, run the following command:
 
 ```sh
-  bin/rails spec 
+  rspec spec 
 ```
 
 ### Deployment

@@ -55,6 +55,7 @@ group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'rspec-rails'
   gem 'rswag-specs'
+  gem 'shoulda', '~> 4.0'
 end
 
 group :development do
