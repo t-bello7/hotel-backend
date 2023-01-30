@@ -192,6 +192,12 @@ GEM
     rswag-ui (2.8.0)
       actionpack (>= 3.1, < 7.1)
       railties (>= 3.1, < 7.1)
+    shoulda (4.0.0)
+      shoulda-context (~> 2.0)
+      shoulda-matchers (~> 4.0)
+    shoulda-context (2.0.0)
+    shoulda-matchers (4.5.1)
+      activesupport (>= 4.2.0)
     simple_token_authentication (1.18.1)
       actionmailer (>= 3.2.6, < 8)
       actionpack (>= 3.2.6, < 8)
@@ -231,6 +237,7 @@ DEPENDENCIES
   rswag-api
   rswag-specs
   rswag-ui
+  shoulda (~> 4.0)
   simple_token_authentication (~> 1.0)
   sprockets-rails
   tzinfo-data
