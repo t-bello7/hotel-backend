@@ -1,20 +1,23 @@
 class Api::V1::RoomsController < ApplicationController
-  before_action :set_api_v1_room, only: %i[show update destroy]
+  load_and_authorize_resource   
+  before_action :set_api_v1_room, only: %i[show update destroy] 
+  before_action :set_api_v1_hotel, only: %i[index]  
+  
 
-  # GET /api/v1/rooms
-  def index
-    @api_v1_rooms = Room.all
+  # GET /api/v1/hotel/:hotel_id/rooms
+  def index    
+    @api_v1_rooms =  @api_v1_hotel.rooms   
 
     render json: @api_v1_rooms
   end
 
-  # GET /api/v1/rooms/1
+  # GET /api/v1/users/1
   def show
     render json: @api_v1_room
   end
 
-  # POST /api/v1/rooms
-  def create
+  # POST /api/v1/hotel/:hotel_id/rooms
+  def create    
     @api_v1_room = Room.new(api_v1_room_params)
 
     if @api_v1_room.save
@@ -35,7 +38,9 @@ class Api::V1::RoomsController < ApplicationController
 
   # DELETE /api/v1/rooms/1
   def destroy
-    @api_v1_room.destroy
+    if @api_v1_room.destroy    
+      render json: {deleted: 'deleted successfully!'}      
+    end    
   end
 
   private
@@ -43,6 +48,10 @@ class Api::V1::RoomsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_api_v1_room
     @api_v1_room = Room.find(params[:id])
+  end 
+  
+  def set_api_v1_hotel
+    @api_v1_hotel = Hotel.find(params[:hotel_id])
   end
 
   # Only allow a list of trusted parameters through.

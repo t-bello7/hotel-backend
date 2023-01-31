@@ -1,9 +1,9 @@
-class Api::V1::BookingsController < ApplicationController
+class Api::V1::BookingsController < ApplicationController 
   before_action :set_api_v1_booking, only: %i[show update destroy]
 
   # GET /api/v1/bookings
   def index
-    @api_v1_bookings = Booking.all
+    @api_v1_bookings = @current_user.bookings    
 
     render json: @api_v1_bookings
   end
@@ -14,15 +14,14 @@ class Api::V1::BookingsController < ApplicationController
   end
 
   # POST /api/v1/bookings
-  def create
+  def create    
     @api_v1_booking = Booking.new(api_v1_booking_params)
     @api_v1_booking.user_id = @current_user.id
-
     if @api_v1_booking.save
       render json: @api_v1_booking, status: :created
     else
       render json: @api_v1_booking.errors, status: :unprocessable_entity
-    end
+    end    
   end
 
   # PATCH/PUT /api/v1/bookings/1
@@ -36,7 +35,9 @@ class Api::V1::BookingsController < ApplicationController
 
   # DELETE /api/v1/bookings/1
   def destroy
-    @api_v1_booking.destroy
+    if @api_v1_booking.destroy      
+    render json: {deleted: 'deleted successfully!'}      
+    end 
   end
 
   private
@@ -48,6 +49,6 @@ class Api::V1::BookingsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def api_v1_booking_params
-    params.permit(:days, :booking_date, :amount, :room_id, :hotel_id)
+    params.permit(:days, :booking_date, :amount, :user_id, :room_id, :hotel_id)
   end
 end
