@@ -1,7 +1,7 @@
 class Api::V1::UsersController < ApplicationController
-  load_and_authorize_resource 
+  load_and_authorize_resource
   skip_before_action :authenticate_request, only: [:create]
-  before_action :set_api_v1_user, only: %i[ show destroy ]
+  before_action :set_api_v1_user, only: %i[show destroy]
 
   # GET /api/v1/users
   def index
@@ -37,19 +37,18 @@ class Api::V1::UsersController < ApplicationController
 
   # DELETE /api/v1/users/1
   def destroy
-    if @api_v1_user.destroy    
-      render json: {deleted: 'deleted successfully!'}      
-    end   
+    render json: { deleted: 'deleted successfully!' } if @api_v1_user.destroy
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_api_v1_user
-      @api_v1_user = User.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def api_v1_user_params
-      params.permit(:username, :email, :password, :role)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_api_v1_user
+    @api_v1_user = User.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def api_v1_user_params
+    params.permit(:username, :email, :password, :role)
+  end
 end

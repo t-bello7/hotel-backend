@@ -1,6 +1,6 @@
-class Api::V1::HotelsController < ApplicationController 
-  load_and_authorize_resource  
-  before_action :set_api_v1_hotel, only: %i[ show update destroy ]
+class Api::V1::HotelsController < ApplicationController
+  load_and_authorize_resource
+  before_action :set_api_v1_hotel, only: %i[show update destroy]
 
   # GET /api/v1/users/:user_id/hotels
   def index
@@ -16,7 +16,7 @@ class Api::V1::HotelsController < ApplicationController
 
   # POST /api/v1/hotels
   def create
-    @api_v1_hotel = @current_user.hotels.new(api_v1_hotel_params)   
+    @api_v1_hotel = @current_user.hotels.new(api_v1_hotel_params)
 
     if @api_v1_hotel.save
       render json: @api_v1_hotel, status: :created
@@ -36,16 +36,16 @@ class Api::V1::HotelsController < ApplicationController
 
   # DELETE /api/v1/hotels/1
   def destroy
-    if @api_v1_hotel.destroy   
-      render json: {deleted: 'deleted successfully!'}      
-    end    
+    render json: { deleted: 'deleted successfully!' } if @api_v1_hotel.destroy
   end
 
   private
+
   def set_api_v1_hotel
     @api_v1_hotel = Hotel.find(params[:id])
   end
-      # Only allow a list of trusted parameters through.
+
+  # Only allow a list of trusted parameters through.
   def api_v1_hotel_params
     params.permit(:name, :location, :email, :phone_number)
   end
