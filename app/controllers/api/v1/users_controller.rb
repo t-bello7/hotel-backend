@@ -1,6 +1,7 @@
 class Api::V1::UsersController < ApplicationController
+  load_and_authorize_resource
   skip_before_action :authenticate_request, only: [:create]
-  before_action :set_api_v1_user, only: %i[show update destroy]
+  before_action :set_api_v1_user, only: %i[show destroy]
 
   # GET /api/v1/users
   def index
@@ -16,6 +17,7 @@ class Api::V1::UsersController < ApplicationController
   # POST /api/v1/users
   def create
     @api_v1_user = User.new(api_v1_user_params)
+
     if @api_v1_user.save
       render json: @api_v1_user, status: :created
     else
@@ -34,7 +36,7 @@ class Api::V1::UsersController < ApplicationController
 
   # DELETE /api/v1/users/1
   def destroy
-    @api_v1_user.destroy
+    render json: { deleted: 'deleted successfully!' } if @api_v1_user.destroy
   end
 
   private

@@ -3,7 +3,7 @@ class Api::V1::BookingsController < ApplicationController
 
   # GET /api/v1/bookings
   def index
-    @api_v1_bookings = Booking.all
+    @api_v1_bookings = @current_user.bookings
 
     render json: @api_v1_bookings
   end
@@ -17,7 +17,6 @@ class Api::V1::BookingsController < ApplicationController
   def create
     @api_v1_booking = Booking.new(api_v1_booking_params)
     @api_v1_booking.user_id = @current_user.id
-
     if @api_v1_booking.save
       render json: @api_v1_booking, status: :created
     else
@@ -36,7 +35,7 @@ class Api::V1::BookingsController < ApplicationController
 
   # DELETE /api/v1/bookings/1
   def destroy
-    @api_v1_booking.destroy
+    render json: { deleted: 'deleted successfully!' } if @api_v1_booking.destroy
   end
 
   private
@@ -48,6 +47,6 @@ class Api::V1::BookingsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def api_v1_booking_params
-    params.permit(:days, :booking_date, :amount, :room_id, :hotel_id)
+    params.permit(:days, :booking_date, :amount, :user_id, :room_id, :hotel_id)
   end
 end

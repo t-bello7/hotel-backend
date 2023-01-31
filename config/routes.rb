@@ -4,18 +4,19 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :rooms do
-        resources :bookings
+      post '/auth/login', to: 'authentication#login'
+      resources :hotels, only: %i[index show] do
+        resources :rooms, only: %i[index show] do
+          resources :bookings
+        end
       end
       resources :users do
-        resources :hotels
-        resources :bookings
+        resources :hotels do
+          resources :rooms do
+            resources :bookings
+          end
+        end
       end
-      resources :hotels do
-        resources :rooms
-      end
-      resources :bookings
-      post '/auth/login', to: 'authentication#login'
     end
   end
 end
