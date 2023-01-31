@@ -43,11 +43,9 @@ gem 'rack-cors', '~> 1.1', '>= 1.1.1'
 # Use cancancan for authorization
 gem 'cancancan'
 
+gem 'jsonapi-serializer'
 gem 'rswag-api'
 gem 'rswag-ui'
-
-gem 'simple_token_authentication', '~> 1.0'
-
 gem 'sprockets-rails', require: 'sprockets/railtie'
 
 group :development, :test do

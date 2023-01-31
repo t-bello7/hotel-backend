@@ -16,9 +16,8 @@ class Api::V1::HotelsController < ApplicationController
   def create
     @api_v1_hotel = Hotel.new(api_v1_hotel_params)
     @api_v1_hotel.user_id = @current_user.id
-
     if @api_v1_hotel.save
-      render json: @api_v1_hotel, status: :created
+      render json: HotelSerializer.new(@api_v1_hotel).serializable_hash[:data][:attributes], status: :created
     else
       render json: @api_v1_hotel.errors, status: :unprocessable_entity
     end
@@ -47,6 +46,6 @@ class Api::V1::HotelsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def api_v1_hotel_params
-    params.permit(:name, :location, :email, :phone_number)
+    params.permit(:name, :location, :email, :phone_number, :image)
   end
 end
