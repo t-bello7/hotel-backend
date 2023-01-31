@@ -1,7 +1,7 @@
 require 'swagger_helper'
 
 RSpec.describe '/api/v1/sessions', type: :request do
-    describe 'POST /create' do
+  describe 'POST /create' do
     context 'with valid parameters' do
       it 'Logins a new Api::v1::User' do
         expect do

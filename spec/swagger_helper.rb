@@ -25,7 +25,7 @@ RSpec.configure do |config|
           url: 'https://{defaultHost}',
           variables: {
             defaultHost: {
-              default: "hotel-backend.fly.dev"
+              default: 'hotel-backend.fly.dev'
             }
           }
         }

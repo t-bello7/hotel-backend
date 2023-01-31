@@ -4,4 +4,6 @@ class Room < ApplicationRecord
 
   validates :price, presence: true
   validates :bed_count, presence: true
+  validates :name, presence: true, uniqueness: true
+  validates :number, presence: true, uniqueness: true
 end
