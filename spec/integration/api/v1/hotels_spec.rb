@@ -66,4 +66,56 @@ describe 'Hotels API' do
       end
     end
   end
+
+  path '/api/v1/hotels/{id}' do
+    patch 'Update a hotel' do
+      tags 'Hotels'
+      consumes 'application/json'
+      parameter name: :id, in: :body, schema: {
+        type: :object,
+        properties: {
+          id: { type: :integer }
+        },
+        required: [{ user_id: 1 }]
+      }
+
+      response '201', 'hotel Updated' do
+        let(:hotel) { { id: 1, user_id: 1 } }
+        run_test!
+      end
+
+      response '422', 'id not found' do
+        let(:hotel) { { name: 'foo' } }
+        run_test!
+      end
+    end
+  end
+
+  path '/api/v1/hotels/{id}' do
+    delete 'Delete a hotel' do
+      tags 'Hotels'
+      consumes 'application/json'
+      parameter name: :id, in: :body, schema: {
+        type: :object,
+        properties: {
+          id: { type: :integer }
+        }
+      }
+
+      response '201', 'deleted succesffully' do
+        let(:hotel) { { id: 1 } }
+        run_test!
+      end
+
+      response '404', 'hotel not found' do
+        let(:id) { 'invalid' }
+        run_test!
+      end
+
+      response '406', 'unsupported accept header' do
+        let(:Accept) { 'application/foo' }
+        run_test!
+      end
+    end
+  end
 end

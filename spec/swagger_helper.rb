@@ -16,10 +16,21 @@ RSpec.configure do |config|
     'v1/swagger.yaml' => {
       openapi: '3.0.1',
       info: {
-        title: 'API V1',
-        version: 'v1'
+        title: 'Hotel API V1',
+        description: 'This api helps you helps you retrive data for the frontend hotel app.
+
+                      Following the following guildlines to get started
+
+                      Step 1: use the following base link: https://hotel-backend.fly.dev during your api fetch, remember to add the user create path link
+                      check example how to create a user account under User Post, After creating user details
+
+                      Step 2: Login with your created email and password via this link https://hotel-backend.fly.dev/api/auth/login.
+                      See the login example below. Once you login, an authentication token will be sent to you
+
+                      Step 3: Put the authentication token to the header section of your http fetch command in every of you subsequent request according to the example paths',
+        version: '1.0.0'
       },
-      paths: {},
+      paths: 'https://hotel-backend.fly.dev',
       servers: [
         {
           url: 'https://{defaultHost}',
