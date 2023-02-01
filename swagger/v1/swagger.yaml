@@ -1,8 +1,19 @@
 ---
 openapi: 3.0.1
 info:
-  title: API V1
-  version: v1
+  title: Hotel API V1
+  description: "This api helps you helps you retrive data for the frontend hotel app.
+    \n        \n                      Following the following guildlines to get started\n\n
+    \                     Step 1: use the following base link: https://hotel-backend.fly.dev
+    during your api fetch, remember to add the user create path link\n                      check
+    example how to create a user account under User Post, After creating user details\n\n
+    \                     Step 2: Login with your created email and password via this
+    link https://hotel-backend.fly.dev/api/auth/login. \n                      See
+    the login example below. Once you login, an authentication token will be sent
+    to you\n\n                      Step 3: Put the authentication token to the header
+    section of your http fetch command in every of you subsequent request according
+    to the example paths"
+  version: 1.0.0
 paths:
   "/api/v1/bookings":
     post:
@@ -11,6 +22,8 @@ paths:
       - Bookings
       parameters: []
       responses:
+        '200':
+          description: hotel Booking created
         '201':
           description: booking created
         '422':
@@ -174,6 +187,26 @@ paths:
           description: booking not found
         '406':
           description: unsupported accept header
+    delete:
+      summary: Delete a booking
+      tags:
+      - Bookings
+      parameters: []
+      responses:
+        '201':
+          description: deleted succesffully
+        '404':
+          description: hotel not found
+        '406':
+          description: unsupported accept header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
   "/api/v1/hotels":
     post:
       summary: Creates a hotel
@@ -280,6 +313,46 @@ paths:
           description: hotel not found
         '406':
           description: unsupported accept header
+    patch:
+      summary: Update a hotel
+      tags:
+      - Hotels
+      parameters: []
+      responses:
+        '201':
+          description: hotel Updated
+        '422':
+          description: id not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+              required:
+              - user_id: 1
+    delete:
+      summary: Delete a hotel
+      tags:
+      - Hotels
+      parameters: []
+      responses:
+        '201':
+          description: deleted succesffully
+        '404':
+          description: hotel not found
+        '406':
+          description: unsupported accept header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
   "/api/v1/rooms":
     post:
       summary: Creates a room
@@ -386,6 +459,47 @@ paths:
           description: hotel not found
         '406':
           description: unsupported accept header
+    patch:
+      summary: Update a room
+      tags:
+      - Rooms
+      parameters: []
+      responses:
+        '201':
+          description: hotel Updated
+        '422':
+          description: id not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+              required:
+              - user_id: 1
+                hotel_id: 1
+    delete:
+      summary: Delete a room
+      tags:
+      - Rooms
+      parameters: []
+      responses:
+        '201':
+          description: deleted succesffully
+        '404':
+          description: room not found
+        '406':
+          description: unsupported accept header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
   "/api/v1/users":
     post:
       summary: Creates a user
@@ -415,6 +529,69 @@ paths:
               - username
               - email
               - role
+              - password
+  "/api/v1/users/":
+    get:
+      summary: Retrieves all users
+      tags:
+      - Users
+      parameters:
+      - in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  username:
+                    type: string
+                  email:
+                    type: string
+                  role:
+                    type: string
+                  password:
+                    type: string
+                required:
+                - id
+                - username
+                - email
+                - role
+                - password
+        '404':
+          description: hotel not found
+        '406':
+          description: unsupported accept header
+  "/auth/login":
+    post:
+      summary: Login with your created email and password
+      tags:
+      - Authentication
+      parameters: []
+      responses:
+        '201':
+          description: "{ token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2NzUyNjk3MzJ9.v--VeLHaZ3GYPIE8W2oeImOqF4Gz4ozSwxnn4Q9aPpk
+            }"
+        '422':
+          description: invalid username or password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+              required:
+              - username
               - password
   "/api/v1/users/{id}":
     get:
@@ -483,6 +660,26 @@ paths:
           description: hotel not found
         '406':
           description: unsupported accept header
+    delete:
+      summary: Delete a user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '201':
+          description: deleted succesffully
+        '404':
+          description: user not found
+        '406':
+          description: unsupported accept header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
 servers:
 - url: https://{defaultHost}
   variables:

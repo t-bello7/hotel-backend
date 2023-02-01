@@ -7,7 +7,7 @@ class Api::V1::RoomsController < ApplicationController
   def index
     @api_v1_rooms = @api_v1_hotel.rooms
 
-    render json: @api_v1_rooms.map { |room| HotelSerializer.new(room).serializable_hash[:data][:attributes] }
+    render json: @api_v1_rooms.map { |room| RoomSerializer.new(room).serializable_hash[:data][:attributes] }
   end
 
   # GET /api/v1/users/1
