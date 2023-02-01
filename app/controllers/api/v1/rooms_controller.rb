@@ -7,12 +7,12 @@ class Api::V1::RoomsController < ApplicationController
   def index
     @api_v1_rooms = @api_v1_hotel.rooms
 
-    render json: @api_v1_rooms
+    render json: @api_v1_rooms.map { |room| HotelSerializer.new(room).serializable_hash[:data][:attributes] }
   end
 
   # GET /api/v1/users/1
   def show
-    render json: @api_v1_room
+    render json: RoomSerializer.new(@api_v1_room).serializable_hash[:data][:attributes]
   end
 
   # POST /api/v1/hotel/:hotel_id/rooms
@@ -20,7 +20,7 @@ class Api::V1::RoomsController < ApplicationController
     @api_v1_room = Room.new(api_v1_room_params)
 
     if @api_v1_room.save
-      render json: @api_v1_room, status: :created
+      render json: RoomSerializer.new(@api_v1_room).serializable_hash[:data][:attributes], status: :created
     else
       render json: @api_v1_room.errors, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class Api::V1::RoomsController < ApplicationController
   # PATCH/PUT /api/v1/rooms/1
   def update
     if @api_v1_room.update(api_v1_room_params)
-      render json: @api_v1_room
+      render json: RoomSerializer.new(@api_v1_room).serializable_hash[:data][:attributes]
     else
       render json: @api_v1_room.errors, status: :unprocessable_entity
     end
@@ -53,6 +53,6 @@ class Api::V1::RoomsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def api_v1_room_params
-    params.permit(:name, :room_type, :bed_count, :price, :reserved, :number, :hotel_id)
+    params.permit(:name, :room_type, :bed_count, :price, :reserved, :number, :hotel_id, :image)
   end
 end

@@ -5,6 +5,7 @@ class User < ApplicationRecord
 
   has_many :bookings
   has_many :hotels
+  has_one_attached :profile_picture
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
@@ -16,5 +17,9 @@ class User < ApplicationRecord
 
   def is?(requested_role)
     role == requested_role.to_s
+  end
+
+  def profile_picture_url
+    Rails.application.routes.url_helpers.url_for(profile_picture) if profile_picture.attached?
   end
 end
