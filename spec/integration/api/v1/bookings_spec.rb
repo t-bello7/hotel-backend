@@ -20,12 +20,12 @@ describe 'Bookings API' do
       response '200', 'hotel Booking created' do
         schema type: :object,
                properties: {
-                id: { type: :integer },
-                days: { type: :integer },
-                booking_date: { type: :datetime },
-                amount: { type: :float },
-                room_id: { type: :bigint },
-                user_id: { type: :bigint }               
+                 id: { type: :integer },
+                 days: { type: :integer },
+                 booking_date: { type: :datetime },
+                 amount: { type: :float },
+                 room_id: { type: :bigint },
+                 user_id: { type: :bigint }
                },
                required: %w[id username email role password]
 
@@ -123,8 +123,9 @@ describe 'Bookings API' do
       parameter name: :id, in: :body, schema: {
         type: :object,
         properties: {
-          id: { type: :integer }       
-        }}
+          id: { type: :integer }
+        }
+      }
 
       response '201', 'deleted succesffully' do
         let(:id) { { id: 1 } }
@@ -139,7 +140,7 @@ describe 'Bookings API' do
       response '406', 'unsupported accept header' do
         let(:Accept) { 'application/foo' }
         run_test!
-      end      
+      end
     end
   end
 end

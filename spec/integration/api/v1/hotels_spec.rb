@@ -74,9 +74,9 @@ describe 'Hotels API' do
       parameter name: :id, in: :body, schema: {
         type: :object,
         properties: {
-          id: { type: :integer }       
+          id: { type: :integer }
         },
-        required: [{user_id: 1}]
+        required: [{ user_id: 1 }]
       }
 
       response '201', 'hotel Updated' do
@@ -98,8 +98,9 @@ describe 'Hotels API' do
       parameter name: :id, in: :body, schema: {
         type: :object,
         properties: {
-          id: { type: :integer }       
-        }}
+          id: { type: :integer }
+        }
+      }
 
       response '201', 'deleted succesffully' do
         let(:hotel) { { id: 1 } }

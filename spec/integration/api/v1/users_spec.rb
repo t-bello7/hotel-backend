@@ -43,7 +43,7 @@ describe 'Users API' do
                  username: { type: :string },
                  email: { type: :string },
                  role: { type: :string },
-                 password: { type: :string },                
+                 password: { type: :string }
                },
                required: %w[id username email role password]
 
@@ -71,7 +71,7 @@ describe 'Users API' do
         type: :object,
         properties: {
           username: { type: :string },
-          email: { type: :string }          
+          email: { type: :string }
         },
         required: %w[username password]
       }
@@ -131,8 +131,9 @@ describe 'Users API' do
       parameter name: :id, in: :body, schema: {
         type: :object,
         properties: {
-          id: { type: :integer }       
-        }}
+          id: { type: :integer }
+        }
+      }
 
       response '201', 'deleted succesffully' do
         let(:hotel) { { id: 1 } }
