@@ -15,9 +15,11 @@ class Api::V1::BookingsController < ApplicationController
 
   # POST /api/v1/bookings
   def create
-    @api_v1_booking = Booking.new(api_v1_booking_params)
-    @api_v1_booking.user_id = @current_user.id
+    @api_v1_booking = @current_user.bookings.new(api_v1_booking_params)
     if @api_v1_booking.save
+      # room = Room.find(api_v1_booking_params["room_id"])
+      # room.update({reserved: true})
+      # puts room.reserved
       render json: @api_v1_booking, status: :created
     else
       render json: @api_v1_booking.errors, status: :unprocessable_entity
@@ -47,6 +49,6 @@ class Api::V1::BookingsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def api_v1_booking_params
-    params.permit(:days, :booking_date, :amount, :user_id, :room_id, :hotel_id)
+    params.permit(:days, :booking_date, :amount, :room_id, :hotel_id)
   end
 end

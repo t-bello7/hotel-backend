@@ -6,15 +6,12 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/auth/login', to: 'authentication#login'
       resources :hotels, only: %i[index show] do
-        resources :rooms, only: %i[index show] do
-          resources :bookings
-        end
+        resources :rooms, only: %i[index show]
       end
       resources :users do
+        resources :bookings
         resources :hotels do
-          resources :rooms do
-            resources :bookings
-          end
+          resources :rooms
         end
       end
     end
