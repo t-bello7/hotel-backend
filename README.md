@@ -136,16 +136,17 @@ You can deploy this project using [Fly](https://fly.io)
 
 ## 👥 Authors <a name="authors"></a>
 
-👤 **Author1**
+👤 **Ezea Stephen Nnabuike**
+
+- GitHub: [@stephnna](https://github.com/stephnna)
+- Twitter: [@stephnna](https://twitter.com/stephnna)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/stephen-ezea/)
+
+👤 **Bello Oluwatomisin**
 
 - GitHub: [@t-bello7](https://github.com/t-bello7)
 - Twitter: [@__tbello](https://twitter.com/__tbello)
 - LinkedIn: [Bello Oluwatomisin](https://linkedin.com/in/tbello7)
-
-👤 **Author2**
-
-- GitHub: [@stephnna](https://github.com/stephnna)
-- LinkedIn: [Stephen Ezea](https://www.linkedin.com/in/stephen-nnabuike-ezea-143b97170/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
