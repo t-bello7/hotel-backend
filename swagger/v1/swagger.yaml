@@ -2,19 +2,45 @@
 openapi: 3.0.1
 info:
   title: Hotel API V1
-  description: "This api helps you helps you retrive data for the frontend hotel app.
-    \n        \n                      Following the following guildlines to get started\n\n
-    \                     Step 1: use the following base link: https://hotel-backend.fly.dev
-    during your api fetch, remember to add the user create path link\n                      check
-    example how to create a user account under User Post, After creating user details\n\n
-    \                     Step 2: Login with your created email and password via this
-    link https://hotel-backend.fly.dev/api/auth/login. \n                      See
-    the login example below. Once you login, an authentication token will be sent
-    to you\n\n                      Step 3: Put the authentication token to the header
-    section of your http fetch command in every of you subsequent request according
-    to the example paths"
+  description: |-
+    This api helps you helps you retrive data for the frontend hotel app.
+
+                          Following the following guildlines to get started
+
+                          Step 1: use the following base link: https://hotel-backend.fly.dev during your api fetch, remember to add the user create path link
+                          check example how to create a user account under User Post, After creating user details
+
+                          Step 2: Login with your created email and password via this link https://hotel-backend.fly.dev/api/auth/login.
+                          See the login example below. Once you login, an authentication token will be sent to you
+
+                          Step 3: Put the authentication token to the header section of your http fetch command in every of you subsequent request according to the example
   version: 1.0.0
 paths:
+  "/auth/login":
+    post:
+      summary: Login with your created email and password
+      tags:
+      - Authentication
+      parameters: []
+      responses:
+        '201':
+          description: "{ token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2NzUyNjk3MzJ9.v--VeLHaZ3GYPIE8W2oeImOqF4Gz4ozSwxnn4Q9aPpk
+            }"
+        '422':
+          description: invalid username or password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+              required:
+              - username
+              - password
   "/api/v1/bookings":
     post:
       summary: Creates a room
@@ -568,31 +594,6 @@ paths:
           description: hotel not found
         '406':
           description: unsupported accept header
-  "/auth/login":
-    post:
-      summary: Login with your created email and password
-      tags:
-      - Authentication
-      parameters: []
-      responses:
-        '201':
-          description: "{ token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2NzUyNjk3MzJ9.v--VeLHaZ3GYPIE8W2oeImOqF4Gz4ozSwxnn4Q9aPpk
-            }"
-        '422':
-          description: invalid username or password
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                username:
-                  type: string
-                email:
-                  type: string
-              required:
-              - username
-              - password
   "/api/v1/users/{id}":
     get:
       summary: Retrieves a user

@@ -27,10 +27,10 @@ RSpec.configure do |config|
                       Step 2: Login with your created email and password via this link https://hotel-backend.fly.dev/api/auth/login.
                       See the login example below. Once you login, an authentication token will be sent to you
 
-                      Step 3: Put the authentication token to the header section of your http fetch command in every of you subsequent request according to the example paths',
+                      Step 3: Put the authentication token to the header section of your http fetch command in every of you subsequent request according to the example',
         version: '1.0.0'
       },
-      paths: 'https://hotel-backend.fly.dev',
+      paths: {},
       servers: [
         {
           url: 'https://{defaultHost}',
