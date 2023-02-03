@@ -25,5 +25,5 @@ describe 'Aunth Athentication API' do
         run_test!
       end
     end
-  end  
+  end
 end

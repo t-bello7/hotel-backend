@@ -61,7 +61,7 @@ describe 'Users API' do
         run_test!
       end
     end
-  end 
+  end
 
   path '/api/v1/users/{id}' do
     get 'Retrieves a user' do
