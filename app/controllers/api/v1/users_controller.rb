@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  load_and_authorize_resource
+  
   skip_before_action :authenticate_request, only: [:create]
   before_action :set_api_v1_user, only: %i[show destroy]
 
